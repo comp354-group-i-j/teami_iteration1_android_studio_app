@@ -32,10 +32,15 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     compile group: 'joda-time', name: 'joda-time', version: '2.10'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.7'
-    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1'
-    compile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.27'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.4.3'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.4.3'
+    compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.4.3'
     compile group: 'org.slf4j', name:'slf4j-api', version: '1.7.21'
-    compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.9.7'
 
+    compile ('org.glassfish.jersey.core:jersey-client:2.12') {
+        exclude group: 'javax.inject', module: 'javax.inject'
+    }
+
+    compile group: 'javax.xml.stream', name: 'stax-api', version: '1.0-2'
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.1'
 }
