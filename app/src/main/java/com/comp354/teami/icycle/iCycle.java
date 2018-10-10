@@ -18,6 +18,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View.OnClickListener;
 
+import android.os.AsyncTask;
+import java.util.concurrent.ExecutionException;
+
 public class iCycle extends AppCompatActivity {
 
     TextView textView;
@@ -53,17 +56,43 @@ public class iCycle extends AppCompatActivity {
                         session = new EndomondoSession(str0, str1);
 
                         try {
-                            session.login();                    // ---> APP CRASHES HERE, no compile errors, no runtime errors, just crashes!!
-                        } catch (LoginException e) {
+                            int loginResult = new LoginTask().execute().get();
+                            if (loginResult == 0) {
+                                String workouts = new GetWorkoutsTask().execute().get();
+                                textView.setText(workouts);
+                            } else {
+                                textView.setText("unable to login");
+                            }
+                        } catch (ExecutionException | InterruptedException e) {
                             e.printStackTrace();
-                        }
-
-                        try {
-                            textView.setText(session.getWorkouts().toString());
-                        } catch (InvocationException e) {
-                            e.printStackTrace();
+                            textView.setText("unhandled exception");
                         }
                     }
                 });
+    }
+
+    private class LoginTask extends AsyncTask<Void, Void, Integer> {
+        @Override
+        protected Integer doInBackground(Void... params) {
+            try {
+                session.login();
+            } catch (LoginException e) {
+                e.printStackTrace();
+                return -1;
+            }
+            return 0;
+        }
+    }
+
+    private class GetWorkoutsTask extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                return session.getWorkouts().toString();
+            } catch (InvocationException e) {
+                e.printStackTrace();
+                return "unable to get workouts";
+            }
+        }
     }
 }
