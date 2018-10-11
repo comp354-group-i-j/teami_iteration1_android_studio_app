@@ -7,6 +7,7 @@ import java.util.Map;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.format.DateTimeFormat;
+import org.joda.time.DateTimeZone;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -57,7 +58,7 @@ public class Workout {
 
 	@JsonProperty("start_time")
 	public void setStartTime(String startTime){
-		this.startTime = DateTime.parse(startTime, DateTimeFormat.forPattern(DATE_FORMAT));
+		this.startTime = DateTime.parse(startTime, DateTimeFormat.forPattern(DATE_FORMAT).withZone(DateTimeZone.forID("America/New_York")));
 	}
 
 	public Long getId() {
@@ -138,6 +139,34 @@ public class Workout {
 
 	@Override
 	public String toString() {
-		return "Workout ID: " + id + "\nDuration: " + (double)duration.getStandardMinutes()/60.0 + "\nDistance: " + distance/1.609 + "\nSport: " + sport + "\nStartTime: " + startTime + "\nAverage speed: " + speedAvg + "\nAverage pace: " + duration.getStandardMinutes()/distance/1.609 + "\nCalories: " + calories + "]\n\n";
+		return String.format(
+				"Sport: %s"
+						+ "\nDate: %s"
+						+ "\nTime: %s"
+						+ "\nDuration: %.2f"
+						+ "\nDistance: %.2f"
+						+ "\nAverage pace: %.2f"
+						+ "\nAverage speed: %.2f"
+						+ "\nMax pace: %s"
+						+ "\nMax speed: %.2f"
+						+ "\nCalories: %.2f"
+						+ "\nMin. Altitude: %.2f"
+						+ "\nMax. Altitude: %.2f"
+						+ "\nHydration: %s"
+						+ "\n\n",
+				sport.toString(),
+				startTime.toString().substring(0,10),
+				startTime.toString().substring(11,19),
+				(double) duration.getStandardMinutes() / 60.0,
+				distance / 1.609,
+				duration.getStandardMinutes() / distance / 1.609,
+				speedAvg,
+				"WIP",
+				speedMax,
+				calories,
+				altitudeMin,
+				altitudeMax,
+				"WIP"
+		);
 	}
 }
