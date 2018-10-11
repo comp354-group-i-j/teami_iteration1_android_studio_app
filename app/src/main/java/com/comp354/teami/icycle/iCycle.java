@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.text.method.ScrollingMovementMethod;
+
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -38,11 +40,7 @@ public class iCycle extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         button = findViewById(R.id.button);
-
-        /*This is just a test case. The idea here for now is similar to how the console application operates.
-        Create an Endomondo session and then call login() method to authenticate login and scrape data.
-        Then call getWorkouts() method to get all workout data as a string, and set that string to textView to display under the login prompt.
-        Currently the app crashes when calling login() on the session object. */
+        textView.setMovementMethod(new ScrollingMovementMethod());
 
         button.setOnClickListener(
                 new View.OnClickListener(){
@@ -52,7 +50,6 @@ public class iCycle extends AppCompatActivity {
                         str1 = password.getText().toString();
 
 
-                        // Use "omarafarajat@gmail.com" as username and "Comp354Fall2018" as password to log into Endomondo account
                         session = new EndomondoSession(str0, str1);
 
                         try {
