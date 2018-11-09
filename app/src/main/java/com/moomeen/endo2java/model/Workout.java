@@ -140,33 +140,30 @@ public class Workout {
 	@Override
 	public String toString() {
 		return String.format(
-				"Sport: %s"
+						"Sport: %s"
 						+ "\nDate: %s"
 						+ "\nTime: %s"
 						+ "\nDuration: %.2f"
 						+ "\nDistance: %.2f"
 						+ "\nAverage pace: %.2f"
 						+ "\nAverage speed: %.2f"
-						+ "\nMax pace: %s"
+						+ "\nMax pace: %.2f"
 						+ "\nMax speed: %.2f"
 						+ "\nCalories: %.2f"
 						+ "\nMin. Altitude: %.2f"
 						+ "\nMax. Altitude: %.2f"
-						+ "\nHydration: %s"
 						+ "\n\n",
-				sport.toString(),
-				startTime.toString().substring(0,10),
-				startTime.toString().substring(11,19),
-				(double) duration.getStandardMinutes() / 60.0,
-				distance / 1.609,
-				duration.getStandardMinutes() / distance / 1.609,
+				sport.toString(),	//Sport
+				startTime.toString().substring(0,10),	//Date
+				startTime.toString().substring(11,19),	//Time
+				duration.getStandardMinutes() / 60.0,	//Duration
+				distance,
+                1/speedAvg*60,		//Average pace
 				speedAvg,
-				"WIP",
-				speedMax,
+				1/speedMax*60,		//Max pace
+				speedMax,			//Max speed
 				calories,
 				altitudeMin,
-				altitudeMax,
-				"WIP"
-		);
+				altitudeMax);
 	}
 }

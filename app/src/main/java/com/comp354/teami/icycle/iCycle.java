@@ -1,11 +1,15 @@
 package com.comp354.teami.icycle;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 import com.moomeen.endo2java.EndomondoSession;
 import com.moomeen.endo2java.error.LoginException;
 import com.moomeen.endo2java.error.InvocationException;
+import com.moomeen.endo2java.model.Workout;
 
 
 import android.view.View;
@@ -21,6 +25,8 @@ import android.util.Log;
 import android.view.View.OnClickListener;
 
 import android.os.AsyncTask;
+
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class iCycle extends AppCompatActivity {
@@ -30,6 +36,7 @@ public class iCycle extends AppCompatActivity {
     Button button;
     String str0, str1;
     EndomondoSession session;
+    public static  List<Workout> workouts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +62,9 @@ public class iCycle extends AppCompatActivity {
                         try {
                             int loginResult = new LoginTask().execute().get();
                             if (loginResult == 0) {
-                                String workouts = new GetWorkoutsTask().execute().get();
-                                textView.setText(workouts);
+                                workouts = new GetWorkoutsTask().execute().get();
+                                //textView.setText(workouts);
+                                goToMainMenu(view);
                             } else {
                                 textView.setText("unable to login");
                             }
@@ -64,8 +72,17 @@ public class iCycle extends AppCompatActivity {
                             e.printStackTrace();
                             textView.setText("unhandled exception");
                         }
+
+
+
                     }
                 });
+    }
+
+
+    public void goToMainMenu(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
     }
 
     private class LoginTask extends AsyncTask<Void, Void, Integer> {
@@ -81,14 +98,14 @@ public class iCycle extends AppCompatActivity {
         }
     }
 
-    private class GetWorkoutsTask extends AsyncTask<Void, Void, String> {
+    private class GetWorkoutsTask extends AsyncTask<Void, Void, List<Workout>> {
         @Override
-        protected String doInBackground(Void... params) {
+        protected List<Workout> doInBackground(Void... params) {
             try {
-                return session.getWorkouts().toString();
+                return session.getWorkouts();
             } catch (InvocationException e) {
                 e.printStackTrace();
-                return "unable to get workouts";
+                return null; //return "unable to get workouts";
             }
         }
     }
