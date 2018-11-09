@@ -32,7 +32,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
+    implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'joda-time:joda-time:2.10'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.4.3'
     implementation 'com.fasterxml.jackson.core:jackson-core:2.4.3'

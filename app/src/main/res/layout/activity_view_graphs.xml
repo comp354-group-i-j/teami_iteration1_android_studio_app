@@ -1,10 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#884EA0"
-    tools:context=".ViewGraphs">
+    tools:context=".ViewGraphs"
+    tools:layout_editor_absoluteY="81dp">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/MaxAltitude"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/MinAltitude"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="172dp"
+        android:layout_marginRight="172dp"
+        android:text="Max Altitude"
+        android:textSize="9sp" />
+
+    <Button
+        android:id="@+id/MaxPace"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_alignEnd="@+id/AvgSpeed"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="13dp"
+        android:text="Max Pace"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/MinAltitude"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_alignStart="@+id/AvgPace"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="9dp"
+        android:text="Min Altitude"
+        android:textSize="9sp" />
+
+    <Button
+        android:id="@+id/AvgPace"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_alignStart="@+id/Calories"
+        android:layout_alignTop="@+id/AvgSpeed"
+        android:text="Avg Pace"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/AvgSpeed"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/MaxSpeed"
+        android:layout_alignEnd="@+id/Duration"
+        android:text="Avg Speed"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/MaxSpeed"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="64dp"
+        android:text="Max Speed"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/Calories"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/Duration"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:text="Calories"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/Duration"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_alignStart="@+id/MaxAltitude"
+        android:layout_alignTop="@+id/Distance"
+        android:text="Duration"
+        android:textSize="12sp" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/Graph"
+        android:layout_width="match_parent"
+        android:layout_height="328dp" />
+
+    <Button
+        android:id="@+id/Distance"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_alignEnd="@+id/MaxSpeed"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="120dp"
+        android:text="Distance"
+        android:textSize="12sp" />
+</RelativeLayout>

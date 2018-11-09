@@ -26,6 +26,7 @@ import android.view.View.OnClickListener;
 
 import android.os.AsyncTask;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -63,7 +64,9 @@ public class iCycle extends AppCompatActivity {
                             int loginResult = new LoginTask().execute().get();
                             if (loginResult == 0) {
                                 workouts = new GetWorkoutsTask().execute().get();
-                                //textView.setText(workouts);
+                                List<Workout> shallowCopy = workouts.subList(0, workouts.size());
+                                Collections.reverse(shallowCopy);
+                                workouts = shallowCopy;
                                 goToMainMenu(view);
                             } else {
                                 textView.setText("unable to login");

@@ -21,7 +21,7 @@ public class WorkoutData extends AppCompatActivity {
 
         TextView distance = findViewById(R.id.Distance);
         if(iCycle.workouts.get(listPos).getSpeedAvg() == null)
-            distance.setText("Avg Pace\n"+"n/a");
+            distance.setText("Distance\n"+"n/a");
         else
             distance.setText("Distance\n"+String.format("%.2f",iCycle.workouts.get(listPos).getDistance())+" km");
 
