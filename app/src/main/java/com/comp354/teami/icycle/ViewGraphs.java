@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -19,6 +20,8 @@ import java.util.Queue;
 
 public class ViewGraphs extends AppCompatActivity {
 
+    EditText min, max;
+    double min1,max1;
     LineGraphSeries<DataPoint> series;
     LineGraphSeries<DataPoint> MA10;
     LineGraphSeries<DataPoint> MA20;
@@ -30,6 +33,9 @@ public class ViewGraphs extends AppCompatActivity {
         setContentView(R.layout.activity_view_graphs);
 
         setTitle("Graphs");
+
+        min = findViewById(R.id.min);
+        max = findViewById(R.id.max);
 
 
 
@@ -50,6 +56,16 @@ public class ViewGraphs extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         setTitle("Distance vs. Time");
+
+                        if (min.getText().toString().matches(""))
+                            min1=0;
+                        else
+                            min1=Double.parseDouble(min.getText().toString());
+
+                        if (max.getText().toString().matches(""))
+                            max1=Double.MAX_VALUE;
+                        else
+                            max1=Double.parseDouble(max.getText().toString());
                         graph.removeAllSeries();
                         series = new LineGraphSeries<DataPoint>();
                         series.setColor(Color.BLUE);
@@ -68,13 +84,16 @@ public class ViewGraphs extends AppCompatActivity {
 
                             x = i;
                             y = iCycle.workouts.get(i).getDistance();
-                            obj.addData(y);
-                            obj.getMean();
-                            obj2.addData(y);
-                            obj2.getMean();
-                            series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
-                            MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
-                            MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
+                            if (y>=min1 && y<=max1)
+                            {
+                                obj.addData(y);
+                                obj.getMean();
+                                obj2.addData(y);
+                                obj2.getMean();
+                                series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
+                                MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
+                                MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
+                            }
 
                         }
                         graph.addSeries(series);
@@ -88,6 +107,16 @@ public class ViewGraphs extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         setTitle("Duration vs. Time");
+
+                        if (min.getText().toString().matches(""))
+                            min1=0;
+                        else
+                            min1=Double.parseDouble(min.getText().toString());
+
+                        if (max.getText().toString().matches(""))
+                            max1=Double.MAX_VALUE;
+                        else
+                            max1=Double.parseDouble(max.getText().toString());
                         graph.removeAllSeries();
                         series = new LineGraphSeries<DataPoint>();
                         series.setColor(Color.BLUE);
@@ -106,14 +135,16 @@ public class ViewGraphs extends AppCompatActivity {
 
                             x = i;
                             y = iCycle.workouts.get(i).getDuration().getStandardMinutes()+0.0;
-                            obj.addData(y);
-                            obj.getMean();
-                            obj2.addData(y);
-                            obj2.getMean();
-                            series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
-                            MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
-                            MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
-
+                            if (y>=min1 && y<=max1)
+                            {
+                                obj.addData(y);
+                                obj.getMean();
+                                obj2.addData(y);
+                                obj2.getMean();
+                                series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
+                                MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
+                                MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
+                            }
                         }
                         graph.addSeries(series);
                         graph.addSeries(MA10);
@@ -126,6 +157,16 @@ public class ViewGraphs extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         setTitle("Calories vs. Time");
+
+                        if (min.getText().toString().matches(""))
+                            min1=0;
+                        else
+                            min1=Double.parseDouble(min.getText().toString());
+
+                        if (max.getText().toString().matches(""))
+                            max1=Double.MAX_VALUE;
+                        else
+                            max1=Double.parseDouble(max.getText().toString());
                         graph.removeAllSeries();
                         series = new LineGraphSeries<DataPoint>();
                         series.setColor(Color.BLUE);
@@ -144,14 +185,16 @@ public class ViewGraphs extends AppCompatActivity {
 
                             x = i;
                             y = iCycle.workouts.get(i).getCalories();
-                            obj.addData(y);
-                            obj.getMean();
-                            obj2.addData(y);
-                            obj2.getMean();
-                            series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
-                            MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
-                            MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
-
+                            if (y>=min1 && y<=max1)
+                            {
+                                obj.addData(y);
+                                obj.getMean();
+                                obj2.addData(y);
+                                obj2.getMean();
+                                series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
+                                MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
+                                MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
+                            }
                         }
                         graph.addSeries(series);
                         graph.addSeries(MA10);
@@ -164,6 +207,16 @@ public class ViewGraphs extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         setTitle("Avg Speed vs. Time");
+
+                        if (min.getText().toString().matches(""))
+                            min1=0;
+                        else
+                            min1=Double.parseDouble(min.getText().toString());
+
+                        if (max.getText().toString().matches(""))
+                            max1=Double.MAX_VALUE;
+                        else
+                            max1=Double.parseDouble(max.getText().toString());
                         graph.removeAllSeries();
                         series = new LineGraphSeries<DataPoint>();
                         series.setColor(Color.BLUE);
@@ -183,14 +236,16 @@ public class ViewGraphs extends AppCompatActivity {
                                 continue;
                             x = i;
                             y = iCycle.workouts.get(i).getSpeedAvg();
-                            obj.addData(y);
-                            obj.getMean();
-                            obj2.addData(y);
-                            obj2.getMean();
-                            series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
-                            MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
-                            MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
-
+                            if (y>=min1 && y<=max1)
+                            {
+                                obj.addData(y);
+                                obj.getMean();
+                                obj2.addData(y);
+                                obj2.getMean();
+                                series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
+                                MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
+                                MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
+                            }
                         }
                         graph.addSeries(series);
                         graph.addSeries(MA10);
@@ -203,6 +258,16 @@ public class ViewGraphs extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         setTitle("Max Speed vs. Time");
+
+                        if (min.getText().toString().matches(""))
+                            min1=0;
+                        else
+                            min1=Double.parseDouble(min.getText().toString());
+
+                        if (max.getText().toString().matches(""))
+                            max1=Double.MAX_VALUE;
+                        else
+                            max1=Double.parseDouble(max.getText().toString());
                         graph.removeAllSeries();
                         series = new LineGraphSeries<DataPoint>();
                         series.setColor(Color.BLUE);
@@ -222,14 +287,16 @@ public class ViewGraphs extends AppCompatActivity {
                                 continue;
                             x = i;
                             y = iCycle.workouts.get(i).getSpeedMax();
-                            obj.addData(y);
-                            obj.getMean();
-                            obj2.addData(y);
-                            obj2.getMean();
-                            series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
-                            MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
-                            MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
-
+                            if (y>=min1 && y<=max1)
+                            {
+                                obj.addData(y);
+                                obj.getMean();
+                                obj2.addData(y);
+                                obj2.getMean();
+                                series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
+                                MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
+                                MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
+                            }
                         }
                         graph.addSeries(series);
                         graph.addSeries(MA10);
@@ -242,6 +309,16 @@ public class ViewGraphs extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         setTitle("Avg Pace vs. Time");
+
+                        if (min.getText().toString().matches(""))
+                            min1=0;
+                        else
+                            min1=Double.parseDouble(min.getText().toString());
+
+                        if (max.getText().toString().matches(""))
+                            max1=Double.MAX_VALUE;
+                        else
+                            max1=Double.parseDouble(max.getText().toString());
                         graph.removeAllSeries();
                         series = new LineGraphSeries<DataPoint>();
                         series.setColor(Color.BLUE);
@@ -261,14 +338,16 @@ public class ViewGraphs extends AppCompatActivity {
                                 continue;
                             x = i;
                             y = 1/iCycle.workouts.get(i).getSpeedAvg()*60;
-                            obj.addData(y);
-                            obj.getMean();
-                            obj2.addData(y);
-                            obj2.getMean();
-                            series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
-                            MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
-                            MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
-
+                            if (y>=min1 && y<=max1)
+                            {
+                                obj.addData(y);
+                                obj.getMean();
+                                obj2.addData(y);
+                                obj2.getMean();
+                                series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
+                                MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
+                                MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
+                            }
                         }
                         graph.addSeries(series);
                         graph.addSeries(MA10);
@@ -281,6 +360,16 @@ public class ViewGraphs extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         setTitle("Max Pace vs. Time");
+
+                        if (min.getText().toString().matches(""))
+                            min1=0;
+                        else
+                            min1=Double.parseDouble(min.getText().toString());
+
+                        if (max.getText().toString().matches(""))
+                            max1=Double.MAX_VALUE;
+                        else
+                            max1=Double.parseDouble(max.getText().toString());
                         graph.removeAllSeries();
                         series = new LineGraphSeries<DataPoint>();
                         series.setColor(Color.BLUE);
@@ -300,14 +389,16 @@ public class ViewGraphs extends AppCompatActivity {
                                 continue;
                             x = i;
                             y = 1/iCycle.workouts.get(i).getSpeedMax()*60;
-                            obj.addData(y);
-                            obj.getMean();
-                            obj2.addData(y);
-                            obj2.getMean();
-                            series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
-                            MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
-                            MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
-
+                            if (y>=min1 && y<=max1)
+                            {
+                                obj.addData(y);
+                                obj.getMean();
+                                obj2.addData(y);
+                                obj2.getMean();
+                                series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
+                                MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
+                                MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
+                            }
                         }
                         graph.addSeries(series);
                         graph.addSeries(MA10);
@@ -320,6 +411,16 @@ public class ViewGraphs extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         setTitle("Min Altitude vs. Time");
+
+                        if (min.getText().toString().matches(""))
+                            min1=0;
+                        else
+                            min1=Double.parseDouble(min.getText().toString());
+
+                        if (max.getText().toString().matches(""))
+                            max1=Double.MAX_VALUE;
+                        else
+                            max1=Double.parseDouble(max.getText().toString());
                         graph.removeAllSeries();
                         series = new LineGraphSeries<DataPoint>();
                         series.setColor(Color.BLUE);
@@ -339,14 +440,16 @@ public class ViewGraphs extends AppCompatActivity {
                                 continue;
                             x = i;
                             y = iCycle.workouts.get(i).getAltitudeMin();
-                            obj.addData(y);
-                            obj.getMean();
-                            obj2.addData(y);
-                            obj2.getMean();
-                            series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
-                            MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
-                            MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
-
+                            if (y>=min1 && y<=max1)
+                            {
+                                obj.addData(y);
+                                obj.getMean();
+                                obj2.addData(y);
+                                obj2.getMean();
+                                series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
+                                MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
+                                MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
+                            }
                         }
                         graph.addSeries(series);
                         graph.addSeries(MA10);
@@ -359,6 +462,16 @@ public class ViewGraphs extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         setTitle("Max Altitude vs. Time");
+
+                        if (min.getText().toString().matches(""))
+                            min1=0;
+                        else
+                            min1=Double.parseDouble(min.getText().toString());
+
+                        if (max.getText().toString().matches(""))
+                            max1=Double.MAX_VALUE;
+                        else
+                            max1=Double.parseDouble(max.getText().toString());
                         graph.removeAllSeries();
                         series = new LineGraphSeries<DataPoint>();
                         series.setColor(Color.BLUE);
@@ -378,14 +491,16 @@ public class ViewGraphs extends AppCompatActivity {
                                 continue;
                             x = i;
                             y = iCycle.workouts.get(i).getAltitudeMax();
-                            obj.addData(y);
-                            obj.getMean();
-                            obj2.addData(y);
-                            obj2.getMean();
-                            series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
-                            MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
-                            MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
-
+                            if (y>=min1 && y<=max1)
+                            {
+                                obj.addData(y);
+                                obj.getMean();
+                                obj2.addData(y);
+                                obj2.getMean();
+                                series.appendData(new DataPoint(x,y), true, iCycle.workouts.size());
+                                MA10.appendData(new DataPoint(x,obj.getMean()), true, iCycle.workouts.size());
+                                MA20.appendData(new DataPoint(x,obj2.getMean()), true, iCycle.workouts.size());
+                            }
                         }
                         graph.addSeries(series);
                         graph.addSeries(MA10);
